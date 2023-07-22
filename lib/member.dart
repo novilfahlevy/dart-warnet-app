@@ -2,9 +2,11 @@ import 'dart:io';
 import 'utils.dart';
 import 'package:uuid/uuid.dart';
 
+typedef Member = Map<String, String>;
+
 final Uuid uuid = Uuid();
 
-final List<Map<String, String>> members = [{
+final List<Member> members = [{
   'id': uuid.v4(),
   'name': 'Member 1',
   'email': 'member1@gmail.com'
@@ -18,12 +20,12 @@ final List<Map<String, String>> members = [{
   'email': 'member3@gmail.com'
 }];
 
-Map<String, String>? findMemberByIndex(final int index) {
-  final Map<String, String> member = members[index];
+Member? findMemberByIndex(final int index) {
+  final Member member = members[index];
   return member;
 }
 
-Map<String, String>? findMemberById(final String id) {
+Member? findMemberById(final String id) {
   return members.firstWhere((member) => member['id'] == id);
 }
 
@@ -49,7 +51,7 @@ int getSelectedMenu() {
 void showMember() {
   print('\n===== Daftar member =====');
   int i = 1;
-  for (final Map<String, String> member in members) {
+  for (final Member member in members) {
     final String name = '${member['name']} (${member['email']})';
     print('${i++}. $name');
   }
@@ -115,7 +117,7 @@ void editMember() {
     return;
   }
 
-  final Map<String, String> member = members[memberIndex - 1];
+  final Member member = members[memberIndex - 1];
 
   stdout.write('Nama member (${member['name']}): ');
   String name = stdin.readLineSync() ?? '';

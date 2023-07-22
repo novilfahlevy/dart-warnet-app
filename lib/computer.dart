@@ -2,9 +2,11 @@ import 'dart:io';
 import 'utils.dart';
 import 'package:uuid/uuid.dart';
 
+typedef Computer = Map<String, String>;
+
 final Uuid uuid = Uuid();
 
-final List<Map<String, String>> computers = [{
+final List<Computer> computers = [{
   'id': uuid.v4(),
   'name': 'PC 1',
 }, {
@@ -15,12 +17,12 @@ final List<Map<String, String>> computers = [{
   'name': 'PC 3',
 }];
 
-Map<String, String>? findComputerByIndex(final int index) {
-  Map<String, String>? computer = computers[index];
+Computer? findComputerByIndex(final int index) {
+  Computer? computer = computers[index];
   return computer;
 }
 
-Map<String, String>? findComputerById(final String id) {
+Computer? findComputerById(final String id) {
   return computers.firstWhere((computer) => computer['id'] == id);
 }
 
@@ -46,7 +48,7 @@ int getSelectedMenu() {
 void showComputer() {
   print('\n===== Daftar PC =====');
   int i = 1;
-  for (final Map<String, String> computer in computers) {
+  for (final Computer computer in computers) {
     print('${i++}. ${computer['name']}');
   }
   print('=====================');

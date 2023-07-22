@@ -5,12 +5,14 @@ import 'package:warnet/member.dart';
 import 'utils.dart';
 import 'package:uuid/uuid.dart';
 
+typedef Billing = Map<String, dynamic>;
+
 Uuid uuid = Uuid();
 
-List<Map<String, dynamic>> billings = [];
+List<Billing> billings = [];
 
-Map<String, dynamic>? findBillingByIndex(final int index) {
-  Map<String, dynamic>? billing = billings[index];
+Billing? findBillingByIndex(final int index) {
+  Billing? billing = billings[index];
   return billing;
 }
 
@@ -36,7 +38,7 @@ int getSelectedMenu() {
 void showBilling() {
   print('\n===== Daftar Billing =====');
   int i = 1;
-  for (final Map<String, dynamic> billing in billings) {
+  for (final Billing billing in billings) {
     Map<String, String>? computer = findComputerById(billing['computerId'] ?? '');
     Map<String, String>? member = findMemberById(billing['memberId'] ?? '');
     print('${i++}. ${member?['name']} (${member?['email']}) | ${computer?['name']} | ${billing['hours']} jam | ${billing['createdAtUtc']}');
@@ -109,7 +111,7 @@ void editBilling() {
   stdout.write('Nomor billing: ');
   String billingIndex = stdin.readLineSync() ?? '';
 
-  final Map<String, dynamic>? billing = findBillingByIndex(int.parse(billingIndex) - 1);
+  final Billing? billing = findBillingByIndex(int.parse(billingIndex) - 1);
   final Map<String, String>? computer = findComputerById(billing?['computerId']);
   final Map<String, String>? member = findMemberById(billing?['memberId']);
 
